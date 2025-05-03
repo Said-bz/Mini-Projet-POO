@@ -1,32 +1,14 @@
 package Entity;
 
-public class Passager {
+public class Passager extends User{
 
-    private String pointDeRamassage;
-    private Profil profil;
+    private Course course;// sa seule course
+    private Chauffeur chauffeur;//logiquement son seul chauffeur
 
-    // Consturcteur
-    public Passager(String pointDeRamassage, Profil profil){
-        this.profil = profil;
-        this.pointDeRamassage = pointDeRamassage;
+    public Passager(String nom, String prenom, String matricule, double reputation,
+                String sex, Profil profil, Course course, Chauffeur chauffeur) {
+        super(nom, prenom, matricule, reputation, sex, profil);
+        this.course = course;
+        this.chauffeur = chauffeur;
     }
-
-    // Setteurs
-    public void setPointDeRamassage(String pointDeRamassage){
-        this.pointDeRamassage = pointDeRamassage;
-    }
-    public void setProfil(Profil profil){
-        this.profil = profil;
-    }
-
-    // Getteurs
-    public String getPointDeRamassage(){
-        return pointDeRamassage;
-    }
-
-    public Profil getProfil(){
-        return profil;
-    }
-
-
 }

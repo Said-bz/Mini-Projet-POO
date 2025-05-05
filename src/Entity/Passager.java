@@ -6,6 +6,7 @@ public class Passager extends User{
     private Chauffeur chauffeur;//logiquement son seul chauffeur
     private String pointDeRamassage; // 1 seul Point de Ramassage pour le passager
 
+    // (miko)
     public Passager(String nom, String prenom, String matricule, double reputation,
                 String sex, Profil profil, Course course, Chauffeur chauffeur) {
         super(nom, prenom, matricule, reputation, sex, profil);
@@ -13,7 +14,7 @@ public class Passager extends User{
         this.chauffeur = chauffeur;
     }
 
-    // 2éme Constructeur, Plus pratique
+    // 2éme Constructeur, Plus pratique (said)
     public Passager(User U, Course course, Chauffeur chauffeur) {
 
         super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getReputation(),U.getSex(),U.getProfil());

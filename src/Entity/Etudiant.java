@@ -7,7 +7,7 @@ public class Etudiant extends User {
     private String faculte;
     private String specialite;
 
-    // Constructeur avec tous les paramètres nécessaires (hérités + spécifiques)
+    // Constructeur avec tous les paramètres nécessaires (hérités + spécifiques) (rahim)
     public Etudiant(String nom, String prenom, String matricule, double reputation,String sex, Profil profil,
                     int anneeAdmission, String faculte, String specialite) {
         super(nom, prenom, matricule, reputation,sex, profil); // appel au constructeur de User
@@ -16,12 +16,20 @@ public class Etudiant extends User {
         setSpecialite(specialite);
     }
 
-    // Getter pour l'année d'admission
+    // 2eme Constructeur (said)
+    public Etudiant(User U, int anneeAdmission, String faculte, String specialite) {
+        super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getReputation(),U.getSex(),U.getProfil());
+        setAnneeAdmission(anneeAdmission);
+        setFaculte(faculte);
+        setSpecialite(specialite);
+    }
+
+    // Getter pour l'année d'admission (rahim)
     public int getAnneeAdmission() {
         return anneeAdmission;
     }
 
-    // Setter avec vérification de validité (entre 1900 et l'année actuelle)
+    // Setter avec vérification de validité (entre 1900 et l'année actuelle) (rahim)
     public void setAnneeAdmission(int anneeAdmission) {
         int currentYear = java.time.Year.now().getValue();
         if (anneeAdmission > 1900 && anneeAdmission <= currentYear) {
@@ -31,12 +39,12 @@ public class Etudiant extends User {
         }
     }
 
-    // Getter pour la faculté
+    // Getter pour la faculté (rahim)
     public String getFaculte() {
         return faculte;
     }
 
-    // Setter avec contrôle (non nul et non vide)
+    // Setter avec contrôle (non nul et non vide) (rahim)
     public void setFaculte(String faculte) {
         if (faculte != null && !faculte.trim().isEmpty()) {
             this.faculte = faculte;
@@ -45,12 +53,12 @@ public class Etudiant extends User {
         }
     }
 
-    // Getter pour la spécialité
+    // Getter pour la spécialité (rahim)
     public String getSpecialite() {
         return specialite;
     }
 
-    // Setter avec contrôle (non nul et non vide)
+    // Setter avec contrôle (non nul et non vide) (rahim)
     public void setSpecialite(String specialite) {
         if (specialite != null && !specialite.trim().isEmpty()) {
             this.specialite = specialite;
@@ -59,7 +67,7 @@ public class Etudiant extends User {
         }
     }
 
-    // Redéfinition de toString pour un affichage lisible d'un étudiant
+    // Redéfinition de toString pour un affichage lisible d'un étudiant (rahim)
     @Override
     public String toString() {
         return  super.toString() + "\n" +

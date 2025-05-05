@@ -8,6 +8,7 @@ public class Chauffeur extends User {
     private int indice_courses = 0;// indice du tableau de courses
     private String[] pointDeRamassage; // Plusieurs Points de Ramassage pour un seul Chauffeur
 
+    // (miko)
     public Chauffeur(String nom, String prenom, String matricule, double reputation, String sex,
                      Profil profil, int nbr_course, int nbplaces) { //le constructeur
 
@@ -17,6 +18,7 @@ public class Chauffeur extends User {
         super(nom, prenom, matricule, reputation, sex, profil);
 
         // Utilisation de setNbplace pour réecriture du code + Correction du setteur
+        // (Miko) / (said)
         setNbPlaces(nbplaces);
 
         if (nbr_course <= max_course) { //si nbr_course<= max_course on prend nbr_cours sinon on prend max_course
@@ -26,7 +28,7 @@ public class Chauffeur extends User {
         }
     }
 
-    // 2éme Constructeur, Plus pratique a L'utilisation
+    // 2éme Constructeur, Plus pratique a L'utilisation (said)
     public Chauffeur(User U, int nbr_course, int nbplaces) { //le constructeur
 
         super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getReputation(),U.getSex(),U.getProfil());
@@ -40,6 +42,7 @@ public class Chauffeur extends User {
         }
     }
 
+    //(miko)
     public boolean addCourse(Course c) {
         if (indice_courses < courses.length) {
             courses[indice_courses] = c;
@@ -51,6 +54,7 @@ public class Chauffeur extends User {
         }
     }
 
+    // Setteur (miko)
     int getNbPlaces () {
         return nbplaces;
     }
@@ -69,6 +73,7 @@ public class Chauffeur extends User {
         }
     }
 
+    // (said)
     @Override
     public String toString(){
         return  super.toString() + "\n" +

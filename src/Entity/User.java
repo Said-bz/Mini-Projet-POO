@@ -10,7 +10,7 @@ public class User {
     private Profil profil;
 
 
-    // Constructeur
+    // Constructeur (houssem)
     public User(String nom, String prenom, String matricule, double reputation, String sex, Profil profil) {
         setNom(nom);
         setPrenom(prenom);
@@ -21,7 +21,7 @@ public class User {
     }
 
 
-    // Getters
+    // Getters (houssem)
     public String getNom() {
         return nom;
     }
@@ -49,7 +49,7 @@ public class User {
         return sex;
     }
 
-    // Setters
+    // Setters (houssem)
     public void setNom(String nom) {
         if (nom != null) {
             this.nom = nom;

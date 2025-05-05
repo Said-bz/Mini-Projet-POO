@@ -1,26 +1,30 @@
 package Entity;
 
+//(miko)
 public class Course {
     private Chauffeur chauffeur;
     private Passager[] passagers;
     private int nbplacesDisp;
     private int indicePassagers = 0;
 
+    //(miko)
     public Course(Chauffeur chauffeur) {
         this.chauffeur = chauffeur;
         this.nbplacesDisp = chauffeur.nbplaces; // OK car même package
     }
 
+    //(miko)
     public boolean addPassager(Passager passager) {
         if (indicePassagers < nbplacesDisp) {
             passagers[indicePassagers] = passager;
             indicePassagers++;
             nbplacesDisp--;//nb de places réstantes
-            return true;// ajout avec succes
+            return true;// ajout avec success
         }
         return false;//erreur d'ajout
     }
 
+    // (miko)
     public boolean suppPassager(Passager passager) {
         for (int i = 0; i < indicePassagers; i++) {
             if (passagers[i] == passager) { // Comparaison par référence

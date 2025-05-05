@@ -5,13 +5,14 @@ import java.util.List;
 public class Profil {
 
     // pour cette classe les attributs sont privées et on utilise des setteurs pour s’assurer qu’on rentre les bonnes valeurs
+    // (houssem)
     private String statut;
     private String Destination; // on a choisi une liste car il pourrait y avoir plusieurs point de passage
     private List<String> preferences; // la même chose plusieurs préférences
     private String disponibilites; // on a pas utilisé de liste car les possibilités sont dans l'intitulé
     private String typeDeCourse;
 
-    // Constructeur
+    // Constructeur (houssem)
     public Profil(String statut, String Destination, List<String> preferences,
                   String disponibilites, String typeDeCourse) {
         setStatut(statut);
@@ -21,7 +22,7 @@ public class Profil {
         setTypeDeCourse(typeDeCourse);
     }
 
-    // Getters
+    // Getters (houssem)
     public String getStatut() {
         return statut;
     }
@@ -42,7 +43,7 @@ public class Profil {
         return typeDeCourse;
     }
 
-    // Setters
+    // Setters (houssem)
     public void setStatut(String statut) {
         if (statut.equals("Chauffeur") ||
                 statut.equals("chauffeur") ||
@@ -101,7 +102,7 @@ public class Profil {
         }
     }
 
-    // Méthode toString pour afficher joliment un Profil
+    // Méthode toString pour afficher joliment un Profil (houssem)
     @Override
     public String toString() {
         return  "Profil{ \n" +

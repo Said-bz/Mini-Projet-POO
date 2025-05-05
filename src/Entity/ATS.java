@@ -7,9 +7,9 @@ public class ATS extends User {
     private String service;
 
     // Constructeur complet avec héritage depuis User
-    public ATS(String nom, String prenom, String matricule, double reputation, Profil profil,
+    public ATS(String nom, String prenom, String matricule, double reputation,String sex, Profil profil,
                int anneeRecrutement, String service) {
-        super(nom, prenom, matricule, /*reputation,*/ profil); // appel au constructeur de User
+        super(nom, prenom, matricule, reputation,sex, profil); // appel au constructeur de User
         setAnneeRecrutement(anneeRecrutement);
         setService(service);
     }
@@ -46,11 +46,11 @@ public class ATS extends User {
     // Affichage personnalisé d’un ATS pour faciliter le debug ou l’affichage dans l’interface
     @Override
     public String toString() {
-        return "ATS : " + getNom() + " " + getPrenom() +
-                ", Matricule : " + getMatricule() +
-                /*", Réputation : " + getReputation() +*/
-                ", Recrutement : " + anneeRecrutement +
-                ", Service : " + service +
-                ", Profil : " + getProfil();
+        return  super.toString() + "\n" +
+                "ATS{ \n" +
+                "Recrutement : " + anneeRecrutement + "\n" +
+                "Service : " + service + "\n" +
+                "}";
+
     }
 }

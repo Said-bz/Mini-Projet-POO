@@ -8,9 +8,9 @@ public class Etudiant extends User {
     private String specialite;
 
     // Constructeur avec tous les paramètres nécessaires (hérités + spécifiques)
-    public Etudiant(String nom, String prenom, String matricule, double reputation, Profil profil,
+    public Etudiant(String nom, String prenom, String matricule, double reputation,String sex, Profil profil,
                     int anneeAdmission, String faculte, String specialite) {
-        super(nom, prenom, matricule, /*reputation,*/ profil); // appel au constructeur de User
+        super(nom, prenom, matricule, reputation,sex, profil); // appel au constructeur de User
         setAnneeAdmission(anneeAdmission);
         setFaculte(faculte);
         setSpecialite(specialite);
@@ -62,12 +62,12 @@ public class Etudiant extends User {
     // Redéfinition de toString pour un affichage lisible d'un étudiant
     @Override
     public String toString() {
-        return "Étudiant : " + getNom() + " " + getPrenom() +
-                ", Matricule : " + getMatricule() +
-                /*", Réputation : " + getReputation() +*/
-                ", Admission : " + anneeAdmission +
-                ", Faculté : " + faculte +
-                ", Spécialité : " + specialite +
-                ", Profil : " + getProfil();
+        return  super.toString() + "\n" +
+                "Etudiant{\n" +
+                "Admission : " + anneeAdmission + "\n" +
+                "Faculté : " + faculte + "\n" +
+                "Spécialité : " + specialite + "\n" +
+                "}";
+
     }
 }

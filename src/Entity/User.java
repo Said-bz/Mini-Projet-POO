@@ -5,15 +5,19 @@ public class User {
     private String nom;
     private String prenom;
     private String matricule;
+    private double reputation;
+    private String sex;
     private Profil profil;
 
 
     // Constructeur
-    public User(String nom, String prenom, String matricule, Profil profil) {
+    public User(String nom, String prenom, String matricule, double reputation, String sex, Profil profil) {
         setNom(nom);
         setPrenom(prenom);
         setMatricule(matricule);
         setProfil(profil);
+        setReputation(reputation);
+        setSex(sex);
     }
 
 
@@ -37,6 +41,13 @@ public class User {
         return profil;
     }
 
+    public double getReputation() {
+        return reputation;
+    }
+
+    public String getSex() {
+        return sex;
+    }
 
     // Setters
     public void setNom(String nom) {
@@ -72,5 +83,32 @@ public class User {
         } else {
             System.out.println("Erreur : Le profil ne peut pas être nul.");
         }
+    }
+
+    public void setReputation(double reputation){
+        this.reputation = reputation;
+    }
+
+    public void setSex(String sex) {
+        if (sex != null &&
+                (sex.equals("Masculin")
+                || sex.equals("Féminin"))) {
+            this.sex = sex;
+        } else {
+            System.out.println("Erreur : Disponibilité invalide ou nulle (" + sex + ")");
+        }
+    }
+
+    // Rajout de la Méthode toString dans User pour un affichage (Said)
+    @Override
+    public String toString(){
+        return  "Nom : " + nom + "\n" +
+                "Prenom : " + prenom + "\n" +
+                "Matricule : " + matricule + "\n" +
+                "Reputation : " + reputation + "\n" +
+                "Sexe : " + sex + "\n" +
+                profil.toString();
+
+
     }
 }

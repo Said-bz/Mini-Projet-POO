@@ -3,18 +3,19 @@ package Entity;
 import java.util.List;
 
 public class Profil {
+
     // pour cette classe les attributs sont privées et on utilise des setteurs pour s’assurer qu’on rentre les bonnes valeurs
     private String statut;
-    private List<String> itineraires; // on a choisi une liste car il pourrait y avoir plusieurs point de passage
+    private String Destination; // on a choisi une liste car il pourrait y avoir plusieurs point de passage
     private List<String> preferences; // la même chose plusieurs préférences
     private String disponibilites; // on a pas utilisé de liste car les possibilités sont dans l'intitulé
     private String typeDeCourse;
 
     // Constructeur
-    public Profil(String statut, List<String> itineraires, List<String> preferences,
+    public Profil(String statut, String Destination, List<String> preferences,
                   String disponibilites, String typeDeCourse) {
         setStatut(statut);
-        setItineraires(itineraires);
+        setDestination(Destination);
         setPreferences(preferences);
         setDisponibilites(disponibilites);
         setTypeDeCourse(typeDeCourse);
@@ -25,8 +26,8 @@ public class Profil {
         return statut;
     }
 
-    public List<String> getItineraires() {
-        return itineraires;
+    public String getDestination() {
+        return Destination;
     }
 
     public List<String> getPreferences() {
@@ -62,11 +63,11 @@ public class Profil {
         }
     }
 
-    public void setItineraires(List<String> itineraires) {
-        if (itineraires == null || itineraires.isEmpty()) {
+    public void setDestination(String destination) {
+        if (destination == null || destination.isEmpty()) {
             System.out.println("Erreur : La liste des itinéraires ne peut pas être vide.");
         } else {
-            this.itineraires = itineraires;
+            this.Destination = destination;
         }
     }
 
@@ -103,12 +104,12 @@ public class Profil {
     // Méthode toString pour afficher joliment un Profil
     @Override
     public String toString() {
-        return "Profil{" +
-                "statut='" + statut + '\'' +
-        ", itineraires=" + itineraires +
-                ", preferences=" + preferences +
-                ", disponibilites='" + disponibilites + '\'' +
-        ", typeDeCourse='" + typeDeCourse + '\'' +
-        '}';
+        return  "Profil{ \n" +
+                "Statut : " + statut + '\n' +
+                "Destination : " + Destination + "\n" +
+                "Preferences : " + preferences + "\n" +
+                "Disponibilités : " + disponibilites + '\n' +
+                "Type De Course : " + typeDeCourse + '\n' +
+                "}";
     }
 }

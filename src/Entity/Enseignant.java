@@ -7,14 +7,14 @@ public class Enseignant extends User {
     // Parameterized constructor to initialize an Enseignant object with necessary attributes (rahim)
     public Enseignant(String nom, String prenom, String matricule, double reputation,String sex, Profil profil,
                       int anneeRecrutement, String faculte) {
-        super(nom, prenom, matricule, reputation,sex, profil); // Calls the constructor of the parent class User
+        super(nom, prenom, matricule, sex, profil); // Calls the constructor of the parent class User
         setAnneeRecrutement(anneeRecrutement); // Sets the year of recruitment with validation
         setFaculte(faculte); // Sets the faculty with validation
     }
 
     // 2eme Constructeur (Said)
     public Enseignant(User U, int anneeRecrutement, String faculte) {
-        super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getReputation(),U.getSex(),U.getProfil());
+        super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getSexe(),U.getProfil());
         setAnneeRecrutement(anneeRecrutement); // Sets the year of recruitment with validation
         setFaculte(faculte); // Sets the faculty with validation
     }

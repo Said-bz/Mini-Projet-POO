@@ -10,7 +10,7 @@ public class Etudiant extends User {
     // Constructeur avec tous les paramètres nécessaires (hérités + spécifiques) (rahim)
     public Etudiant(String nom, String prenom, String matricule, double reputation,String sex, Profil profil,
                     int anneeAdmission, String faculte, String specialite) {
-        super(nom, prenom, matricule, reputation,sex, profil); // appel au constructeur de User
+        super(nom, prenom, matricule,sex, profil); // appel au constructeur de User
         setAnneeAdmission(anneeAdmission);
         setFaculte(faculte);
         setSpecialite(specialite);
@@ -18,7 +18,7 @@ public class Etudiant extends User {
 
     // 2eme Constructeur (said)
     public Etudiant(User U, int anneeAdmission, String faculte, String specialite) {
-        super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getReputation(),U.getSex(),U.getProfil());
+        super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getSexe(),U.getProfil());
         setAnneeAdmission(anneeAdmission);
         setFaculte(faculte);
         setSpecialite(specialite);

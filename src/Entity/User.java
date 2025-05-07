@@ -5,21 +5,35 @@ public class User {
     private String nom;
     private String prenom;
     private String matricule;
-    private double reputation;
-    private String sex;
+    private String sexe;
     private Profil profil;
+    private boolean isActive;
 
 
     // Constructeur (houssem)
-    public User(String nom, String prenom, String matricule, double reputation, String sex, Profil profil) {
+    public User(String nom, String prenom, String matricule, String sexe, Profil profil) {
         setNom(nom);
         setPrenom(prenom);
         setMatricule(matricule);
         setProfil(profil);
-        setReputation(reputation);
-        setSex(sex);
+        setSexe(sexe);
+    }
+    public User(String nom, String prenom, String matricule, String sexe, Profil profil, boolean isActive) {
+        setNom(nom);
+        setPrenom(prenom);
+        setMatricule(matricule);
+        setProfil(profil);
+        setSexe(sexe);
+        setActive(isActive);
     }
 
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public boolean getActive(){
+        return isActive;
+    }
 
     // Getters (houssem)
     public String getNom() {
@@ -41,15 +55,11 @@ public class User {
         return profil;
     }
 
-    public double getReputation() {
-        return reputation;
+    public String getSexe() {
+        return sexe;
     }
 
-    public String getSex() {
-        return sex;
-    }
-
-    // Setters (houssem)
+    // Setters
     public void setNom(String nom) {
         if (nom != null) {
             this.nom = nom;
@@ -85,17 +95,13 @@ public class User {
         }
     }
 
-    public void setReputation(double reputation){
-        this.reputation = reputation;
-    }
-
-    public void setSex(String sex) {
-        if (sex != null &&
-                (sex.equals("Masculin")
-                || sex.equals("Féminin"))) {
-            this.sex = sex;
+    public void setSexe(String sexe) {
+        if (sexe != null &&
+                (sexe.equals("Masculin")
+                || sexe.equals("Féminin"))) {
+            this.sexe = sexe;
         } else {
-            System.out.println("Erreur : Disponibilité invalide ou nulle (" + sex + ")");
+            System.out.println("Erreur : Disponibilité invalide ou nulle (" + sexe + ")");
         }
     }
 
@@ -105,10 +111,12 @@ public class User {
         return  "Nom : " + nom + "\n" +
                 "Prenom : " + prenom + "\n" +
                 "Matricule : " + matricule + "\n" +
-                "Reputation : " + reputation + "\n" +
-                "Sexe : " + sex + "\n" +
+                "Sexe : " + sexe + "\n" +
                 profil.toString();
+    }
 
-
+    public String toFileString(){
+        return getMatricule() + " " + getNom() + " " + getPrenom() + " " + getSexe() + " " + isActive + " "
+                + getProfil().toFileString();
     }
 }

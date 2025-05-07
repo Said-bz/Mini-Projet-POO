@@ -9,14 +9,14 @@ public class ATS extends User {
     // Constructeur complet avec héritage depuis User (rahim)
     public ATS(String nom, String prenom, String matricule, double reputation,String sex, Profil profil,
                int anneeRecrutement, String service) {
-        super(nom, prenom, matricule, reputation,sex, profil); // appel au constructeur de User
+        super(nom, prenom, matricule,sex, profil); // appel au constructeur de User
         setAnneeRecrutement(anneeRecrutement);
         setService(service);
     }
 
     // 2eme Constructeur (said)
     public ATS(User U,  int anneeRecrutement, String service) {
-        super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getReputation(),U.getSex(),U.getProfil());
+        super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getSexe(),U.getProfil());
         setAnneeRecrutement(anneeRecrutement);
         setService(service);
     }

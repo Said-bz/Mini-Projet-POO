@@ -1,12 +1,15 @@
 package Entity;
 
+import java.util.Arrays;
+
 public class Chauffeur extends User {
-    Course[] courses; //peut avoir une ou plusieurs courses (courses prévu pour le planning
+
+    /* Version (Miko)
+    //Course[] courses; //peut avoir une ou plusieurs courses (courses prévu pour le planning
 
     int nbplaces;//peut varier donc get/set (niveau par défaut pour réutilisation)
     private static final int max_course = 20;//nb max de courses
     private int indice_courses = 0;// indice du tableau de courses
-    private String[] pointDeRamassage; // Plusieurs Points de Ramassage pour un seul Chauffeur
 
     // (miko)
     public Chauffeur(String nom, String prenom, String matricule, double reputation, String sex,
@@ -31,7 +34,7 @@ public class Chauffeur extends User {
     // 2éme Constructeur, Plus pratique a L'utilisation (said)
     public Chauffeur(User U, int nbr_course, int nbplaces) { //le constructeur
 
-        super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getReputation(),U.getSex(),U.getProfil());
+        super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getReputation(),U.getSexe(),U.getProfil());
 
         setNbPlaces(nbplaces);
 
@@ -76,9 +79,67 @@ public class Chauffeur extends User {
     // (said)
     @Override
     public String toString(){
-        return  super.toString() + "\n" +
-                "Chauffeur{\n" +
-                "Nombre de Places : " + nbplaces + "\n" +
-                "}";
+        return  "Matricule : " + super.getMatricule() + " " +
+                "Nombre de Places : " + nbplaces;
     }
+    */
+
+
+    // Version (Said)
+
+    private double reputation;
+    private int cptReputation = 0;
+    private String[] pointDeRamassage; // Plusieurs Points de Ramassage pour un seul Chauffeur
+    int nbPlaces;
+
+    public Chauffeur(String nom, String prenom, String matricule, String sex,
+                     Profil profil, double reputation, int nbplaces,String[] pointDeRamassage) { //le constructeur
+
+        super(nom, prenom, matricule, sex, profil);
+
+        this.reputation = reputation;
+        this.nbPlaces = nbplaces;
+        this.pointDeRamassage = pointDeRamassage;
+    }
+
+    // 2éme Constructeur, Plus pratique a L'utilisation (said)
+    public Chauffeur(User U, int nbplaces,String[] pointDeRamassage) { //le constructeur
+
+        super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getSexe(),U.getProfil());
+        this.nbPlaces = nbplaces;
+        this.pointDeRamassage = pointDeRamassage;
+    }
+
+    public void updateReputation(double reputation){
+        this.cptReputation++;
+        this.reputation = ((this.reputation * (cptReputation - 1)) + reputation) / cptReputation;
+    }
+
+    public double getReputation() {
+        return reputation;
+    }
+
+    public int getNbPlaces() {
+        return nbPlaces;
+    }
+
+    public String[] getPointDeRamassage() {
+        return pointDeRamassage;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\n" +
+                " Nombre de Places : " + this.getNbPlaces() + "\n" +
+                "Reputation : " + this.getReputation() + "\n" +
+                "Points De Ramassage : " + Arrays.toString(pointDeRamassage);
+    }
+
+    @Override
+    public String toFileString(){
+        return  this.getMatricule() + " " +  String.join(" ",this.getProfil().getPreferences()) + " " +
+                this.getProfil().getDestination() + " " + String.join(" ",pointDeRamassage) + " " +
+                this.getReputation() + " " + this.getNbPlaces();
+    }
+
 }

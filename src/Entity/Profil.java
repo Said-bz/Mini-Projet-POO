@@ -1,6 +1,6 @@
 package Entity;
 
-import java.util.List;
+import java.util.Arrays;
 
 public class Profil {
 
@@ -8,12 +8,12 @@ public class Profil {
     // (houssem)
     private String statut;
     private String Destination; // on a choisi une liste car il pourrait y avoir plusieurs point de passage
-    private List<String> preferences; // la même chose plusieurs préférences
+    private String[] preferences; // la même chose plusieurs préférences
     private String disponibilites; // on a pas utilisé de liste car les possibilités sont dans l'intitulé
     private String typeDeCourse;
 
     // Constructeur (houssem)
-    public Profil(String statut, String Destination, List<String> preferences,
+    public Profil(String statut, String Destination, String[] preferences,
                   String disponibilites, String typeDeCourse) {
         setStatut(statut);
         setDestination(Destination);
@@ -31,7 +31,7 @@ public class Profil {
         return Destination;
     }
 
-    public List<String> getPreferences() {
+    public String[] getPreferences() {
         return preferences;
     }
 
@@ -72,7 +72,7 @@ public class Profil {
         }
     }
 
-    public void setPreferences(List<String> preferences) {
+    public void setPreferences(String[] preferences) {
         if (preferences == null) {
             System.out.println("Erreur : Les préférences ne peuvent pas être nulles.");
         } else {
@@ -105,12 +105,15 @@ public class Profil {
     // Méthode toString pour afficher joliment un Profil (houssem)
     @Override
     public String toString() {
-        return  "Profil{ \n" +
-                "Statut : " + statut + '\n' +
+        return  "Statut : " + statut + '\n' +
                 "Destination : " + Destination + "\n" +
-                "Preferences : " + preferences + "\n" +
+                "Preferences : " + Arrays.toString(preferences) + "\n" +
                 "Disponibilités : " + disponibilites + '\n' +
-                "Type De Course : " + typeDeCourse + '\n' +
-                "}";
+                "Type De Course : " + typeDeCourse + '\n';
+    }
+
+    public String toFileString(){
+        return getStatut() + " " + getDestination() + " " + String.join(" ",getPreferences()) + " " +
+                getDisponibilites() + " " + getTypeDeCourse();
     }
 }

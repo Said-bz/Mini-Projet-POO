@@ -1,11 +1,16 @@
 package Calc;
+
 import Entity.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Creation {
+public class Gestion {
 
     /*
         Class Creation contient des methodes Static pour faciliter l'ecriture Du Main pour eviter
@@ -29,7 +34,7 @@ public class Creation {
         System.out.println("Entrer Votre Matricule :");
         String mat = Clavier.nextLine();
 
-        Profil P = Creation.CreateProfil();
+        Profil P = Gestion.CreateProfil();
 
         return new User(nom,prenom,mat,0,"Masculin",P);
     }
@@ -70,7 +75,7 @@ public class Creation {
 
         System.out.println("Creation d'un Chauffeur");
 
-        User U = Creation.createUser();
+        User U = Gestion.createUser();
 
         Scanner Clavier = new Scanner(System.in);
         System.out.println("Enter le Nombre de Course Max : ");
@@ -94,6 +99,75 @@ public class Creation {
 
         return new Chauffeur(U,x,y);
     }
+
+    /*
+    Partie Gestion de La BDD :
+     */
+
+    // Insertion : (said) , peut étre a rajouter dans la creation de l'objet
+
+    public static void addUser(User U){
+        try(FileWriter file = new FileWriter("src/BDD/User.txt",true)) {
+
+            file.write(" ");
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void addChauffeur(Chauffeur C){
+        try(FileWriter file = new FileWriter("src/BDD/Chauffeur.txt",true)) {
+
+            file.write(" ");
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void addPassager(Chauffeur C){
+        try(FileWriter file = new FileWriter("src/BDD/Passager.txt",true)) {
+
+            file.write(" ");
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void addMotDePasse(String matricule,String MotDePasse){
+        try(FileWriter file = new FileWriter("src/BDD/MotDePasse.txt",true)) {
+
+            file.write(matricule + " " + MotDePasse);
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    // Recherche
+
+    public static void findUser(String matricule){
+        // les fichiers doivent etre initialisé, sinon problem
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/BDD/User.txt"))){
+            String[] Temp;
+            String Line;
+            while((Line = reader.readLine()) != null){
+                Temp = Line.split(" ");
+                if(Temp[0].equals(matricule) ){
+
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
 
 
 }

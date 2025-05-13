@@ -7,7 +7,7 @@ public class Course {
 
     public static int cptID = 0;
 
-    private int ID_Course;
+    private final int ID_Course;
     private final Chauffeur chauffeur;
     private Passager[] passagers;
     private int nbplacesDisp;
@@ -50,11 +50,6 @@ public class Course {
         this.isFinished = true;
         System.out.println("Noter Le Chauffeur : ");
         chauffeur.updateReputation(Clavier.nextDouble());
-    }
-
-
-    public boolean isCourseFinished(){
-        return isFinished;
     }
 
     public String getPassagerMatricule() {

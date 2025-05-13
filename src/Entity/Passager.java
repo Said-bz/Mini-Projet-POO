@@ -10,8 +10,6 @@ public class Passager extends User{
     public Passager(String nom, String prenom, String matricule,
                 String sex, Profil profil, double reputation,String pointDeRamassage) {
         super(nom, prenom, matricule, sex, profil);
-        //this.course = course;
-        //this.chauffeur = chauffeur;
         this.reputation = reputation;
         this.pointDeRamassage = pointDeRamassage;
     }
@@ -23,14 +21,6 @@ public class Passager extends User{
 
         this.reputation = reputation;
         this.pointDeRamassage = pointDeRamassage;
-    }
-
-    public void setReputation(double reputation) {
-        this.reputation = reputation;
-    }
-
-    public void setPointDeRamassage(String pointDeRamassage){
-           this.pointDeRamassage = pointDeRamassage;
     }
 
     public String getPointDeRamassage() {

@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class Gestion {
 
+    static Scanner Clavier = new Scanner(System.in);
+
     /*
         Class Creation contient des methodes Static pour faciliter l'ecriture Du Main pour eviter
         les Grandes lignes de Saisie de Données, Améliorant sa lisibilité.
@@ -17,98 +19,262 @@ public class Gestion {
      */
 
     //(said)
-    public static User createUser(){
 
-        System.out.println("Creation d'un User");
+        public static User createUser() {
+            System.out.println("Creation d'un User");
 
-        Scanner Clavier = new Scanner(System.in);
-        System.out.println("Création d'un nouveau Compte :");
-        System.out.println("Entrer Votre Nom :");
-        String nom = Clavier.nextLine();
-        System.out.println("Entrer Votre Prénom :");
-        String prenom = Clavier.nextLine();
+            System.out.println("Création d'un nouveau Compte :");
 
-        System.out.println("Entrer Votre Matricule :");
-        String mat = Clavier.nextLine();
+            // Vérification du nom
+            String nom = "";
+            while (nom == null || nom.isEmpty()) {
+                System.out.println("Entrer Votre Nom :");
+                nom = Clavier.nextLine();
+                if (nom == null || nom.isEmpty()) {
+                    System.out.println("Erreur : Le nom ne peut pas être vide.");
+                }
+            }
 
-        Profil P = Gestion.createProfil();
 
-        return new User(nom,prenom,mat,"Masculin",P);
+
+            // Vérification du prénom
+            String prenom = "";
+            while (prenom == null || prenom.isEmpty()) {
+                System.out.println("Entrer Votre Prénom :");
+                prenom = Clavier.nextLine();
+                if (prenom == null || prenom.isEmpty()) {
+                    System.out.println("Erreur : Le prénom ne peut pas être vide.");
+                }
+            }
+
+            // Vérification du matricule
+            String mat = "";
+            while (mat == null || mat.isEmpty()) {
+                System.out.println("Entrer Votre Matricule :");
+                mat = Clavier.nextLine();
+                if (mat == null || mat.isEmpty()) {
+                    System.out.println("Erreur : Le matricule ne peut pas être vide.");
+                }
+            }
+
+            // Vérification du sexe
+            String sexe = "";
+            while (!(sexe.equals("Masculin") || sexe.equals("Féminin"))) {
+                System.out.println("Entrer Votre Sexe (Masculin/Féminin) :");
+                sexe = Clavier.nextLine();
+                if (!(sexe.equals("Masculin") || sexe.equals("Féminin"))) {
+                    System.out.println("Erreur : Le sexe doit être 'Masculin' ou 'Féminin'.");
+                }
+            }
+
+            // Création du profil
+            Profil P = createProfil();
+
+            boolean validPref = false;
+            while (!validPref) {
+
+                System.out.println("Vous étes ? :");
+
+                System.out.println("1 - Étudiant");
+                System.out.println("2 - Enseignant ");
+                System.out.println("3 - ATS");
+                int i = Clavier.nextInt(); Clavier.nextLine();
+
+                if (i == 1 || i == 2 || i == 0) {
+                    validPref = true;
+                } else {
+                    System.out.println("Erreur : Choix invalide.");
+                }
+                // UPCASTING donc ca passe créme
+                switch (i) {
+                    case 0:
+                        return createEtudiant(new User(nom, prenom, mat, sexe, P));
+                    case 1:
+                        return createEnseignant(new User(nom, prenom, mat, sexe, P));
+                    case 2:
+                        return createATS(new User(nom, prenom, mat, sexe, P));
+                }
+            }
+
+            return new User(nom, prenom, mat, sexe, P);
+        }
+
+        public static Profil createProfil() {
+
+            // Vérification du statut
+            String status = "";
+            while (!status.equals("Passager") && !status.equals("Chauffeur")) {
+                System.out.println("Entrer Votre Status (Passager/Chauffeur) :");
+                status = Clavier.nextLine();
+                if (!status.equals("Passager") && !status.equals("Chauffeur")) {
+                    System.out.println("Erreur : Le statut doit être 'Passager' ou 'Chauffeur'.");
+                }
+            }
+
+            // Vérification de la destination
+            String dest = "";
+            while (dest == null || dest.isEmpty()) {
+                System.out.println("Entrer Votre Destination :");
+                dest = Clavier.nextLine();
+                if (dest == null || dest.isEmpty()) {
+                    System.out.println("Erreur : La destination ne peut pas être vide.");
+                }
+            }
+
+            // Préférences : choix multiple
+            String[] pref = new String[3];
+            for (int i = 0; i < 3; i++) {
+                boolean validPref = false;
+                while (!validPref) {
+                    System.out.println("Choix des Préférences (" + (i + 1) + "):");
+                    switch (i) {
+                        case 0:
+                            System.out.println("1 - Garçons Uniquement");
+                            System.out.println("2 - Filles Uniquement ");
+                            System.out.println("3 - Indifferent");
+                            break;
+                        case 1:
+                            System.out.println("1 - Avec Musique");
+                            System.out.println("2 - Sans Musique");
+                            System.out.println("3 - Indifférent");
+                            break;
+                        case 2:
+                            System.out.println("1 - Avec Baggage Supplementary");
+                            System.out.println("1 - Sans Baggage Supplementary");
+                            System.out.println("1 - Indifférent");
+                            break;
+                    }
+                    pref[i] = Clavier.nextLine();
+                    if (pref[i].matches("[1-3]")) {
+                        validPref = true;
+                    } else {
+                        System.out.println("Erreur : Choix invalide.");
+                    }
+                }
+            }
+
+            // Disponibilité : Vérification
+            String dispo = "";
+            while (!(dispo.equals("Journalier") || dispo.equals("Quotidien") || dispo.equals("Hebdomadaires"))) {
+                System.out.println("Entrer Votre Disponibilité (Journalier, Quotidien, Hebdomadaires) :");
+                dispo = Clavier.nextLine();
+                if (!(dispo.equals("Journalier") || dispo.equals("Quotidien") || dispo.equals("Hebdomadaires"))) {
+                    System.out.println("Erreur : La disponibilité doit être 'Journalier', 'Quotidien' ou 'Hebdomadaires'.");
+                }
+            }
+
+            // Type de course : Vérification
+            String type = "";
+            while (!(type.equals("Aller") || type.equals("Retour") || type.equals("Aller - Retour"))) {
+                System.out.println("Entrer Votre Type de Course (Aller, Retour, Aller - Retour) :");
+                type = Clavier.nextLine();
+                if (!(type.equals("Aller") || type.equals("Retour") || type.equals("Aller - Retour"))) {
+                    System.out.println("Erreur : Le type de course doit être 'Aller', 'Retour' ou 'Aller - Retour'.");
+                }
+            }
+
+            return new Profil(status, dest, pref, dispo, type);
+        }
+
+        public static Passager createPassager(User U) {
+
+            String x1 = "";
+
+            // Vérification du point de ramassage
+            while (x1 == null || x1.isEmpty()) {
+                System.out.println("Enter Votre Point De Ramassage : ");
+                x1 = Clavier.nextLine();
+                if (x1 == null || x1.isEmpty()) {
+                    System.out.println("Erreur : Le point de ramassage ne peut pas être vide.");
+                }
+            }
+
+            return new Passager(U, 0.0, x1);
+        }
+
+        public static Chauffeur createChauffeur() {
+            System.out.println("Creation d'un Chauffeur");
+
+            User U = createUser();
+
+            Scanner Clavier = new Scanner(System.in);
+
+            // Vérification des points de ramassage
+            String x1 = "", x2 = "", x3 = "";
+            while (x1 == null || x1.isEmpty()) {
+                System.out.println("Enter Vos Point De Ramassage : ");
+                x1 = Clavier.nextLine();
+                if (x1 == null || x1.isEmpty()) {
+                    System.out.println("Erreur : Le point de ramassage ne peut pas être vide.");
+                }
+            }
+            while (x2 == null || x2.isEmpty()) {
+                System.out.println("Enter Vos Point De Ramassage : ");
+                x2 = Clavier.nextLine();
+                if (x2 == null || x2.isEmpty()) {
+                    System.out.println("Erreur : Le point de ramassage ne peut pas être vide.");
+                }
+            }
+            while (x3 == null || x3.isEmpty()) {
+                System.out.println("Enter Vos Point De Ramassage : ");
+                x3 = Clavier.nextLine();
+                if (x3 == null || x3.isEmpty()) {
+                    System.out.println("Erreur : Le point de ramassage ne peut pas être vide.");
+                }
+            }
+
+            // Vérification du nombre de places
+            int y = -1;
+            while (y <= 0) {
+                System.out.println("Enter le Nombre de Places : ");
+                y = Clavier.nextInt();
+                if (y <= 0) {
+                    System.out.println("Erreur : Le nombre de places doit être supérieur à zéro.");
+                }
+            }
+
+            return new Chauffeur(U, y, new String[]{x1, x2, x3});
+        }
+
+    public static Etudiant createEtudiant(User U){
+
+        System.out.println("Entrer Votre Année d'Admission :");
+        int a = Clavier.nextInt(); Clavier.nextLine();
+        System.out.println("Entrer Votre Faculté :");
+        String F = Clavier.nextLine();
+        System.out.println("Entrer Votre Spécialité :");
+        String S = Clavier.nextLine();
+
+        return new Etudiant(U,a,F,S);
+    }
+
+    public static Enseignant createEnseignant(User U){
+
+        System.out.println("Entrer Votre Année de Recrutement :");
+        int a = Clavier.nextInt(); Clavier.nextLine();
+        System.out.println("Entrer Votre Faculté :");
+        String F = Clavier.nextLine();
+
+        return new Enseignant(U,a,F);
+    }
+
+    public static ATS createATS(User U){
+
+        System.out.println("Entrer Votre Année de Recrutement :");
+        int a = Clavier.nextInt(); Clavier.nextLine();
+        System.out.println("Entrer Votre Service :");
+        String s = Clavier.nextLine();
+
+        return new ATS(U,a,s);
     }
 
     //(said)
-    public static Profil createProfil(){
-
-        Scanner Clavier = new Scanner(System.in);
-
-        System.out.println("Entrer Votre Status (Passager/Chaffuer) :");
-        String status = Clavier.nextLine();
-
-        System.out.println("Entrer Votre Destination :");
-        String dest = Clavier.nextLine();
-
-        String[]  pref = new String[3];
-        System.out.println("Choix des Préferences (1):");
-        System.out.println("1 - Garcons Uniquement");
-        System.out.println("2 - Filles Uniquement");
-        System.out.println("3 - Indifferent");
-        pref[0] = Clavier.nextLine();
-
-        System.out.println("Choix des Préférences (2):");
-        System.out.println("1 - Avec Musique");
-        System.out.println("2 - Sans Musique");
-        System.out.println("3 - Indifferent");
-        pref[1] = Clavier.nextLine();
-
-        System.out.println("Choix des Préférences (3):");
-        System.out.println("1 - Avec Baggage Supplementary");
-        System.out.println("2 - Sans Baggage Supplementary");
-        System.out.println("3 - Indifferent");
-        pref[2] = Clavier.nextLine();
-
-
-        System.out.println("Entrer Votre Disponibilité (Journalier, Quotidien, Hebdomadaires) :");
-        String dispo = Clavier.nextLine();
-
-        System.out.println("Entrer Votre Type de Course (Aller, Retour , Aller - Retour) :");
-        String type = Clavier.nextLine();
-
-        return new Profil(status,dest, pref, dispo, type);
-    }
-
-    //(said)
-    public static Passager createPassager(User U){
-        Scanner Clavier = new Scanner(System.in);
-        System.out.println("Enter Votre Point De Ramassage : ");
-        String x1 = Clavier.nextLine();
-
-        return new Passager(U,0.0,x1);
-    }
 
     // (said)
-    public static Chauffeur createChauffeur(){
-
-        System.out.println("Creation d'un Chauffeur");
-
-        User U = Gestion.createUser();
-
-        Scanner Clavier = new Scanner(System.in);
-        System.out.println("Enter Vos Point De Ramassage : ");
-        String x1 = Clavier.nextLine();
-        System.out.println("Enter Vos Point De Ramassage : ");
-        String x2 = Clavier.nextLine();
-        System.out.println("Enter Vos Point De Ramassage : ");
-        String x3 = Clavier.nextLine();
-        System.out.println("Enter le Nombre de De Places: ");
-        int y = Clavier.nextInt();
-
-        return new Chauffeur(U,y, new String[]{x1,x2,x3});
-    }
 
     // (said)
     public static Chauffeur createChauffeur(User U){
 
-        Scanner Clavier = new Scanner(System.in);
         System.out.println("Enter Vos Point De Ramassage : ");
         String x1 = Clavier.nextLine();
         System.out.println("Enter Vos Point De Ramassage : ");
@@ -123,7 +289,6 @@ public class Gestion {
 
     // (said)
     public static String createMotDePasse(){
-        Scanner Clavier = new Scanner(System.in);
         System.out.println("Entrer Votre Mot de Passe : ");
         return Clavier.nextLine();
     }
@@ -466,6 +631,175 @@ public class Gestion {
         deleteFromFile("User.txt", matricule);
         deleteFromFile("Passager.txt", matricule);
         deleteFromFile("Chauffeur.txt", matricule);
+    }
+
+    // Statistique
+
+    public static Passager[] getTop10Passagers() {
+        Passager[] top10 = new Passager[10];
+        double[] reputations = new double[10];
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/BDD/Passager.txt"))) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] temp = line.split(" ");
+                if (temp.length >= 7) {
+                    String matricule = temp[0];
+                    User u = Gestion.findUser(matricule);
+
+                    if (u != null) {
+                        double reputation = Double.parseDouble(temp[6]);
+                        String moyenTransport = temp[5];
+                        Passager passager = new Passager(u, reputation, moyenTransport);
+
+                        // Cherche où insérer ce passager dans le tableau top10
+                        for (int i = 0; i < 10; i++) {
+                            if (top10[i] == null || reputation > reputations[i]) {
+                                // Décale les éléments vers la droite pour insérer
+                                for (int j = 9; j > i; j--) {
+                                    top10[j] = top10[j - 1];
+                                    reputations[j] = reputations[j - 1];
+                                }
+                                top10[i] = passager;
+                                reputations[i] = reputation;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return top10;
+    }
+
+    public static Chauffeur[] getTop10Chauffeurs() {
+        Chauffeur[] top10 = new Chauffeur[10];
+        double[] reputations = new double[10];
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/BDD/Chauffeur.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] Temp = line.split(" ");
+
+                double reputation = Double.parseDouble(Temp[6]);
+                int nbPlaces = Integer.parseInt(Temp[5]);
+                String matricule = Temp[0];
+
+                // Construire le tableau de points de ramassage à partir de Temp[7] jusqu'à la fin
+                String[] pointsDeRamassage = new String[Temp.length - 7];
+                System.arraycopy(Temp, 7, pointsDeRamassage, 0, Temp.length - 7);
+
+                // Créer l'objet User associé
+                User U = Gestion.findUser(matricule);
+                if (U == null) continue;
+
+                Chauffeur chauffeur = new Chauffeur(U, nbPlaces, pointsDeRamassage);
+
+                // Insérer dans top10 si sa réputation est suffisante
+                for (int i = 0; i < 10; i++) {
+                    if (top10[i] == null || reputation > reputations[i]) {
+                        // Décaler vers la droite
+                        for (int j = 9; j > i; j--) {
+                            top10[j] = top10[j - 1];
+                            reputations[j] = reputations[j - 1];
+                        }
+                        // Insérer le nouveau chauffeur
+                        top10[i] = chauffeur;
+                        reputations[i] = reputation;
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return top10;
+    }
+
+    public static Passager[] getWorst10Passagers() {
+        Passager[] worst10 = new Passager[10];
+        double[] reputations = new double[10];
+        // Initialiser à des valeurs très hautes pour les reputations
+        for (int i = 0; i < 10; i++) reputations[i] = Double.MAX_VALUE;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/BDD/Passager.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] Temp = line.split(" ");
+
+                double reputation = Double.parseDouble(Temp[6]);
+                String matricule = Temp[0];
+                String moyenDePaiement = Temp[5];
+
+                User U = Gestion.findUser(matricule);
+                if (U == null) continue;
+
+                Passager passager = new Passager(U, reputation, moyenDePaiement);
+
+                for (int i = 0; i < 10; i++) {
+                    if (worst10[i] == null || reputation < reputations[i]) {
+                        for (int j = 9; j > i; j--) {
+                            worst10[j] = worst10[j - 1];
+                            reputations[j] = reputations[j - 1];
+                        }
+                        worst10[i] = passager;
+                        reputations[i] = reputation;
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return worst10;
+    }
+
+    public static Chauffeur[] getWorst10Chauffeurs() {
+        Chauffeur[] worst10 = new Chauffeur[10];
+        double[] reputations = new double[10];
+        for (int i = 0; i < 10; i++) reputations[i] = Double.MAX_VALUE;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/BDD/Chauffeur.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] Temp = line.split(" ");
+
+                double reputation = Double.parseDouble(Temp[6]);
+                int nbPlaces = Integer.parseInt(Temp[5]);
+                String matricule = Temp[0];
+
+                // Construire les points de ramassage
+                String[] pointsDeRamassage = new String[Temp.length - 7];
+                System.arraycopy(Temp, 7, pointsDeRamassage, 0, Temp.length - 7);
+
+                User U = Gestion.findUser(matricule);
+                if (U == null) continue;
+
+                Chauffeur chauffeur = new Chauffeur(U, nbPlaces, pointsDeRamassage);
+
+                for (int i = 0; i < 10; i++) {
+                    if (worst10[i] == null || reputation < reputations[i]) {
+                        for (int j = 9; j > i; j--) {
+                            worst10[j] = worst10[j - 1];
+                            reputations[j] = reputations[j - 1];
+                        }
+                        worst10[i] = chauffeur;
+                        reputations[i] = reputation;
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return worst10;
     }
 
 

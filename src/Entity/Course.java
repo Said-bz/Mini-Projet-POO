@@ -34,39 +34,6 @@ public class Course {
         return false;//erreur d'ajout
     }
 
-    // (miko)
-    public boolean suppPassager(Passager passager) {
-        for (int i = 0; i < indicePassagers; i++) {
-            if (passagers[i] == passager) { // Comparaison par référence
-                // Décalage manuel des éléments vers la gauche
-                for (int j = i; j < indicePassagers - 1; j++) {
-                    passagers[j] = passagers[j + 1]; // Même si passagers[j+1] est null, c'est OK
-                }
-                // Nettoyage de la dernière référence et mise à jour des compteurs
-                passagers[indicePassagers - 1] = null;
-                indicePassagers--;
-                nbplacesDisp++;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // A NE PAS UTILISER PARCE QUE NE SERT A RIEN
-    public void debutCourse(int seconds) {
-        new Thread( () ->
-            {
-                try {
-                    Thread.sleep(seconds * 1000L); // attendre n secondes
-                    isFinished = true; // une fois terminé, mettre à true
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        ).start();
-    }
-
     public void finCourse(Chauffeur C){
 
         Scanner Clavier = new Scanner(System.in);

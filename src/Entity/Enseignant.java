@@ -4,24 +4,11 @@ public class Enseignant extends User {
     private int anneeRecrutement; // Year of recruitment of the teacher
     private String faculte; // Faculty of the teacher
 
-    // Parameterized constructor to initialize an Enseignant object with necessary attributes (rahim)
-    public Enseignant(String nom, String prenom, String matricule, double reputation,String sex, Profil profil,
-                      int anneeRecrutement, String faculte) {
-        super(nom, prenom, matricule, sex, profil); // Calls the constructor of the parent class User
-        setAnneeRecrutement(anneeRecrutement); // Sets the year of recruitment with validation
-        setFaculte(faculte); // Sets the faculty with validation
-    }
-
     // 2eme Constructeur (Said)
     public Enseignant(User U, int anneeRecrutement, String faculte) {
         super(U.getNom(),U.getPrenom(),U.getMatricule(),U.getSexe(),U.getProfil());
         setAnneeRecrutement(anneeRecrutement); // Sets the year of recruitment with validation
         setFaculte(faculte); // Sets the faculty with validation
-    }
-
-    // Getter for the year of recruitment (rahim)
-    public int getAnneeRecrutement() {
-        return anneeRecrutement;
     }
 
     // Setter for the year of recruitment with validation to ensure it's a valid year (rahim)
@@ -32,11 +19,6 @@ public class Enseignant extends User {
         } else {
             System.out.println("Erreur : L'année de recrutement doit être comprise entre 1900 et " + currentYear);
         }
-    }
-
-    // Getter for the faculty name (rahim)
-    public String getFaculte() {
-        return faculte;
     }
 
     // Setter for the faculty with validation to ensure it's not null or empty

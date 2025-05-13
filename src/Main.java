@@ -39,12 +39,13 @@ public class Main {
                         System.out.println("Entrer Votre Mot De Passe : ");
                         String motDePasse = Clavier.nextLine();
                         if (Gestion.isMotDePasseExist(mat, motDePasse)) {
-                            isConnected = true;
+
                             U = Gestion.findUser(mat);
                             if (U == null) {
                                 break;
                             }
                             if (!Objects.equals(U.getMatricule(),"0")) {
+                                isConnected = true;
                                 System.out.println("Vous étes Connecté !");
                                 System.out.println("Bienvenue " + U.getNom() + " " + U.getPrenom() + " !");
                             } else {
@@ -174,8 +175,7 @@ public class Main {
                                         }
                                     } while (!RechercheTermine);
 
-                                    System.out.println("Lancement De La Course..."); // Valeur a Modifier
-                                    //course.debutCourse(300); // Lance un Timer de 5min, La course se terminera dans 5min
+                                    System.out.println("Lancement De La Course...");
 
                                     Gestion.sleep(5);
 
@@ -268,7 +268,16 @@ public class Main {
                                     Course course = new Course(C);
                                     course.addPassager(P); // Ajouter le passager à la course
                                     Gestion.updateCourse(course); // Mettre à jour la course
-                                    System.out.println("Course réservée avec succès !");
+
+                                    System.out.println("Lancement De La Course...");
+
+                                    Gestion.sleep(5);
+
+                                    System.out.println("Course Terminée...");
+
+                                    course.finCourse(P);
+                                    Gestion.updateCourse(course);
+
                                 } else {
                                     System.out.println("Course non réservée.");
                                 }
